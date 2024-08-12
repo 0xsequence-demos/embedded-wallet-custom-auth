@@ -7,6 +7,7 @@ function App() {
   const [awaitingEmailCodeInput, setAwaitingEmailCodeInput] = useState(false)
   const [walletAddress, setWalletAddress] = useState<any>('')
   const [email, setEmail] = useState<any>('')
+  const [otpAnswer, setOtpAnswer] = useState<any>('')
   const [respondWithCode, setRespondWithCode] = useState<((code: string) => Promise<void>) | null>()
 
   const signIn = async () => {
@@ -25,38 +26,41 @@ function App() {
     setEmail(null)
     try {
       const sessions = await sequence.listSessions()
-      for(let i = 0; i < sessions.length; i++){
-        await sequence.dropSession({ sessionId: sessions[i].id })
-      }
+      await sequence.dropSession({ sessionId: sessions[0].id })
     }catch(err){
       console.log(err)
     }
   }
 
   const setEmailInput = (input: any) => {
-    setEmail(input)
+    if(!awaitingEmailCodeInput){
+      setEmail(input)
+    } else {
+      setOtpAnswer(input)
+    }
   }
 
   useEffect(() => {
-      return sequence.onEmailAuthCodeRequired(async respondWithCode => {
+      sequence.onEmailAuthCodeRequired(async respondWithCode => {
         setRespondWithCode(() => respondWithCode)
       })
-  }, [email, setRespondWithCode])
+  }, [otpAnswer, setRespondWithCode])
 
   useEffect(() => {
     setTimeout(async ()=> {
-      if(Number.isInteger(Number(email)) && respondWithCode) {
-        await respondWithCode(email!)
+      if(Number.isInteger(Number(otpAnswer)) && respondWithCode) {
+        console.log(otpAnswer)
+        await respondWithCode(otpAnswer!)
       }
     })
-  }, [email])
+  }, [otpAnswer])
 
   return (
     <>
       <h1>Email WaaS Auth</h1>
 
       {/* email / code input */}
-      {! walletAddress && <input value={email!} onChange={(evt: any) => setEmailInput(evt.target.value!)} className='email-code' placeholder={!awaitingEmailCodeInput ? 'email' : 'email code'}></input> }
+      {! walletAddress && <input value={awaitingEmailCodeInput ? otpAnswer : email!} onChange={(evt: any) => setEmailInput(evt.target.value!)} className='email-code' placeholder={!awaitingEmailCodeInput ? 'email' : 'email code'}></input> }
       
       {/* email / code button */}
       {! walletAddress && <button onClick={() => signIn()}>{awaitingEmailCodeInput ? 'input code': 'sign in'}</button> }
