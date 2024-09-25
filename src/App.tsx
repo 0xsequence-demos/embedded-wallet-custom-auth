@@ -16,6 +16,7 @@ function App() {
 
     if(!awaitingEmailCodeInput){
       const emailResponse = await sequence.signIn({ email }, 'Email Waas Auth')
+      console.log(emailResponse)
       setWalletAddress(emailResponse.wallet)
     }
   }
