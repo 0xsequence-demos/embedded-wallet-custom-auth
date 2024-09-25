@@ -36,7 +36,7 @@ function App() {
   const setEmailInput = (input: any) => {
     if(!awaitingEmailCodeInput){
       setEmail(input)
-    } else {
+    } else{
       setOtpAnswer(input)
     }
   }
@@ -49,7 +49,7 @@ function App() {
 
   useEffect(() => {
     setTimeout(async ()=> {
-      if(Number.isInteger(Number(otpAnswer)) && respondWithCode) {
+      if(Number.isInteger(Number(otpAnswer)) && respondWithCode && otpAnswer.length == 6) {
         console.log(otpAnswer)
         await respondWithCode(otpAnswer!)
       }
@@ -58,7 +58,7 @@ function App() {
 
   return (
     <>
-      <h1>Email WaaS Auth</h1>
+      <h1>Email Embedded Wallet Auth</h1>
 
       {/* email / code input */}
       {! walletAddress && <input value={awaitingEmailCodeInput ? otpAnswer : email!} onChange={(evt: any) => setEmailInput(evt.target.value!)} className='email-code' placeholder={!awaitingEmailCodeInput ? 'email' : 'email code'}></input> }
