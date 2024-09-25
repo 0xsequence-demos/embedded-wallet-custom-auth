@@ -51,7 +51,11 @@ function App() {
     setTimeout(async ()=> {
       if(Number.isInteger(Number(otpAnswer)) && respondWithCode && otpAnswer.length == 6) {
         console.log(otpAnswer)
-        await respondWithCode(otpAnswer!)
+        try {
+          await respondWithCode(otpAnswer!)
+        }catch(err){
+          console.log(err)
+        }
       }
     })
   }, [otpAnswer])
