@@ -1,5 +1,5 @@
-# Email Embedded Wallet Boilerplate
-Starter email based authentication for Sequence Embedded Wallet boilerplate that uses [Sequence Embedded Wallet](https://docs.sequence.xyz/solutions/wallets/embedded-wallet/overview) with React.
+# Embedded Wallet Custom Auth Flow
+Example application showcasing UX flow for email based authentication and [Sequence Embedded Wallet](https://docs.sequence.xyz/solutions/wallets/embedded-wallet/overview) with a traditional email / password setup. Application defaults to the Immutable zkevm testnet.
 
 ## Quickstart
 
