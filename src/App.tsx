@@ -3,6 +3,27 @@ import './App.css'
 import { sequence } from './config.ts'
 import { ethers } from 'ethers'
 
+// Add interfaces for the transaction response types
+interface SuccessfulTransaction {
+  txHash: string;
+  metaTxHash: string;
+  request: any; // IntentDataSendTransaction
+  receipt: any; // MetaTxnReceipt
+  nativeReceipt?: any;
+  simulations?: any[]; // SimulateResult[]
+}
+
+interface FailedTransaction {
+  error: string;
+  request: any; // IntentDataSendTransaction
+  simulations: any[]; // SimulateResult[]
+}
+
+// Union type for transaction response
+type TransactionResponse = {
+  data?: SuccessfulTransaction | FailedTransaction;
+};
+
 function App() {
 
   const [awaitingEmailCodeInput, setAwaitingEmailCodeInput] = useState(false)
@@ -75,14 +96,14 @@ function App() {
             value: ethers.parseEther("0") // 0 value transaction
           }
         ]
-      })
+      }) as TransactionResponse
 
       console.log('Transaction response:', tx)
       
       // Check transaction response based on Sequence WaaS SDK structure
-      if (tx && tx.data && tx.data.txHash) {
+      if (tx?.data && 'txHash' in tx.data) {
         setTransactionHash(tx.data.txHash)
-      } else if (tx && tx.data && tx.data.error) {
+      } else if (tx?.data && 'error' in tx.data) {
         setTransactionError(tx.data.error)
       } else {
         setTransactionError('Unknown error occurred')
@@ -96,7 +117,7 @@ function App() {
   }
 
   useEffect(() => {
-      sequence.onEmailAuthCodeRequired(async respondWithCode => {
+      sequence.onEmailAuthCodeRequired(async (respondWithCode: (code: string) => Promise<void>) => {
         setRespondWithCode(() => respondWithCode)
       })
   }, [otpAnswer, setRespondWithCode])
