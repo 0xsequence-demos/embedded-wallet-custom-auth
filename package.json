@@ -11,7 +11,8 @@
     "postinstall": "(cp -n .env.example .env) || echo already exists"
   },
   "dependencies": {
-    "@0xsequence/waas": "1.10.0",
+    "@0xsequence/waas": "2.3.4",
+    "ethers": "^6.13.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },

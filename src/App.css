@@ -49,3 +49,173 @@
 .wallet-address {
   margin: 20px;
 }
+
+.login-container {
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: #1a4971;
+  padding: 20px;
+  border-radius: 5px;
+  color: white;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 10px;
+}
+
+.login-input {
+  padding: 15px;
+  border-radius: 5px;
+  border: none;
+  font-size: 16px;
+  background-color: #f0f0f0;
+  color: black;
+}
+
+.login-button {
+  padding: 15px;
+  border-radius: 5px;
+  border: none;
+  background-color: #337ab7;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.login-button:hover {
+  background-color: #2868a0;
+}
+
+.login-button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+.otp-container {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.email-code {
+  height: 30px;
+  margin: 10px 0;
+  padding: 5px 10px;
+  width: 200px;
+  color: black;
+}
+
+.wallet-container {
+  max-width: 500px;
+  margin: 20px auto;
+  background-color: #1a4971;
+  padding: 20px;
+  border-radius: 5px;
+  color: white;
+}
+
+.wallet-info {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 10px;
+  margin: 0;
+}
+
+.wallet-field {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.wallet-label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  font-size: 14px;
+  padding-left: 2px;
+}
+
+.wallet-address {
+  background-color: #f0f0f0;
+  color: black;
+  padding: 15px;
+  border-radius: 5px;
+  font-family: monospace;
+  word-break: break-all;
+  text-align: left;
+  margin: 0;
+}
+
+.logout-button {
+  background-color: #dc3545;
+  margin-top: 10px;
+}
+
+.logout-button:hover {
+  background-color: #c82333;
+}
+
+.transaction-success, 
+.transaction-error {
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 10px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+}
+
+.transaction-success {
+  border-left: 4px solid #28a745;
+}
+
+.transaction-error {
+  border-left: 4px solid #dc3545;
+}
+
+.transaction-label {
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.transaction-hash,
+.error-message {
+  font-family: monospace;
+  overflow-wrap: break-word;
+  word-break: break-all;
+  color: #333;
+  font-size: 13px;
+}
+
+.transaction-hash-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.explorer-link {
+  display: inline-block;
+  color: #0d6efd;
+  text-decoration: none;
+  font-size: 14px;
+  margin-top: 5px;
+  font-weight: 500;
+}
+
+.explorer-link:hover {
+  text-decoration: underline;
+  color: #0a58ca;
+}
